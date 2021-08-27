@@ -1,4 +1,5 @@
 import './App.css';
+import React, { Component } from 'react';
 import Customer from './components/Customer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -20,33 +21,28 @@ const styles=theme=>({
 })
 
 
-const customers=[{
-  'id': 1,
-  'image':'https://placeimg.com/64/64/1',
-  'name':'홍길동',
-  'birthday':'324',
-  'gender':'남자',
-  'job':'프로그래머'
-},{
-  'id': 2,
-  'image':'https://placeimg.com/64/64/2',
-  'name':'김또또',
-  'birthday':'323244',
-  'gender':'중성화',
-  'job':'강아지'
-},{
-  'id': 3,
-  'image':'https://placeimg.com/64/64/3',
-  'name':'손예진',
-  'birthday':'324222',
-  'gender':'남자',
-  'job':'학생'
-}];
+class App extends Component{
+  state={
+    customers:""
+  }
+  
+  componentDidMount(){
+    this.callApi()
+    .then(res=>this.setState({customers:res}))
+    .catch(err=>console.log(err));
+  }
 
-function App(props) {
-  const {classes}=props;
-  return (
-    <Paper className={classes.root}>
+  callApi=async()=>{
+    //res는 callApi함수에서 리턴한 body
+    const response=await fetch('/api/customers');//해당 에이피아에서 응답 받아옴
+    const body=await response.json();
+    return body;
+  }
+
+  render(){
+    const {classes}=this.props;
+    return (
+      <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -59,11 +55,16 @@ function App(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {customers.map(c=><Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}></Customer>)}
+          {this.state.customers?
+          this.state.customers.map(c=><Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}></Customer>):
+          ''
+          }
         </TableBody>
       </Table>
     </Paper>
-  );
+    )
+
+  }
 }
 
 export default withStyles(styles)(App);
