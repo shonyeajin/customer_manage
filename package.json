@@ -1,0 +1,16 @@
+{
+    "name":"customer_management",
+    "version":"1.0.0",
+    "scripts":{
+        "client":"cd client && npm run start",
+        "server":"nodemon sever.js",
+        "dev":"concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
+    },
+    "dependencies":{
+        "body-parser":"^1.18.3",
+        "express": "4.17.1"
+    },
+    "devDependencies":{
+        "concurrently":"^4.0.1"
+    }
+}
