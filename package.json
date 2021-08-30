@@ -1,16 +1,19 @@
 {
-    "name":"customer_management",
-    "version":"1.0.0",
-    "scripts":{
-        "client":"cd client && npm run start",
-        "server":"nodemon server.js",
-        "dev":"concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "name": "customer_management",
+    "version": "1.0.0",
+    "scripts": {
+        "client": "cd client && npm run start",
+        "server": "nodemon server.js",
+        "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
     },
-    "dependencies":{
-        "body-parser":"^1.18.3",
-        "express": "4.17.1"
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "4.17.1",
+        "multer": "^1.4.3",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.3.0"
     },
-    "devDependencies":{
-        "concurrently":"^4.0.1"
+    "devDependencies": {
+        "concurrently": "^4.0.1"
     }
 }
